@@ -1,0 +1,43 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /spring-web-jdbc
+  shutdown: graceful
+
+spring:
+  application:
+    name: spring-web-jdbc
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false
+    property-naming-strategy: SNAKE_CASE
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+    show-sql: true
+  routing:
+    datasource:
+      default-target-data-source: primary
+      target-data-sources:
+        primary:
+          pool-name: primary-pool
+          jdbc-url: jdbc:postgresql://localhost:5432/postgres
+          username: postgres
+          password: postgres
+          driver-class-name: org.postgresql.Driver
+  threads:
+    virtual:
+      enabled: true
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: info,health,metrics
+  info:
+    java:
+      enabled: true
