@@ -13,7 +13,7 @@ spring:
     property-naming-strategy: SNAKE_CASE
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     open-in-view: false
     show-sql: true
   routing:
@@ -23,6 +23,19 @@ spring:
         primary:
           pool-name: primary-pool
           jdbc-url: jdbc:postgresql://localhost:5432/postgres
+          username: postgres
+          password: postgres
+          driver-class-name: org.postgresql.Driver
+        primary-prefer-slave:
+          pool-name: primary-prefer-slave-pool
+          jdbc-url: jdbc:postgresql://localhost:5432/postgres?targetServerType=preferSecondary
+          username: postgres
+          password: postgres
+          driver-class-name: org.postgresql.Driver
+          read-only: true
+        secondary:
+          pool-name: secondary-pool
+          jdbc-url: jdbc:postgresql://localhost:5433/postgres
           username: postgres
           password: postgres
           driver-class-name: org.postgresql.Driver

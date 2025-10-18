@@ -1,0 +1,38 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /spring-web-mongo
+  shutdown: graceful
+
+spring:
+  application:
+    name: spring-web-mongo
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false
+    property-naming-strategy: SNAKE_CASE
+  routing:
+    datasource:
+      default-target-data-source: primary
+      target-data-sources:
+        primary:
+          uri: mongodb://localhost:27017/mongodb
+        primary-prefer-secondary:
+          uri: mongodb://localhost:27017/mongodb?readPreference=secondaryPreferred
+        secondary:
+          uri: mongodb://localhost:27018/mongodb
+  threads:
+    virtual:
+      enabled: true
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: info,health,metrics
+  info:
+    java:
+      enabled: true

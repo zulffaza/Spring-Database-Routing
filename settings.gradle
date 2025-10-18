@@ -1,3 +1,4 @@
 rootProject.name = 'spring-database-routing'
 
 include 'spring-web-jdbc'
+include 'spring-web-mongo'
